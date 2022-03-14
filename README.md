@@ -68,10 +68,11 @@ Things you may want to cover:
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
 | postal_code        | string     | null: false                    |
-| prefecture         | references | null: false, foreign_key: true |
+| prefecture         | string     | null: false                    |
 | city               | string     | null: false                    |
 | address_line       | string     | null: false                    |
 | building           | string     |                                |
 | phone_number       | string     | null: false                    |
+| buy                | references | null: false, foreign_key: true |
 ### Association
 - belongs_to :buy
