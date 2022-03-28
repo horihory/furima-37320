@@ -16,7 +16,6 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path
     else
-      @item.attributes = item_params
       render :new
     end
   end
@@ -32,7 +31,6 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to item_path(@item.id)
     else
-      @item.attributes = item_params
       render :edit
     end
   end
