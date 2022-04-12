@@ -5,11 +5,11 @@ class BuyShipment
   with_options presence: true do
     validates :user_id
     validates :item_id
-    validates :postal_code
+    validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
     validates :city
     validates :address_line
-    validates :phone_number, format: { with: /\A(((0(\d{1}[-(]?\d{4}|\d{2}[-(]?\d{3}|\d{3}[-(]?\d{2}|\d{4}[-(]?\d{1}|[5789]0[-(]?\d{4})[-)]?)|\d{1,4}\-?)\d{4}|0120[-(]?\d{3}[-)]?\d{3})\z/ }
+    validates :phone_number, format: { with: /\A\d{10,11}\z/ }
     validates :token
   end
 
