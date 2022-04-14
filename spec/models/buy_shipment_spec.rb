@@ -32,7 +32,7 @@ RSpec.describe BuyShipment, type: :model do
     it 'postal_codeが半角のハイフンを含んだ正しい形式でないと登録できないこと' do
       @buy_shipment.postal_code = '1234567'
       @buy_shipment.valid?
-      expect(@buy_shipment.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+      expect(@buy_shipment.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
     end
     it 'prefecture_idを選択していないと保存できないこと' do
       @buy_shipment.prefecture_id = 0
@@ -57,12 +57,12 @@ RSpec.describe BuyShipment, type: :model do
     it 'phone_numberが全角数字では登録できないこと' do
       @buy_shipment.phone_number = '０９０１２３４５６７８'
       @buy_shipment.valid?
-      expect(@buy_shipment.errors.full_messages).to include("Phone number is invalid")
+      expect(@buy_shipment.errors.full_messages).to include('Phone number is invalid')
     end
     it 'phone_numberに半角ハイフンが入ると登録できない' do
       @buy_shipment.phone_number = '090-1234-5678'
       @buy_shipment.valid?
-      expect(@buy_shipment.errors.full_messages).to include("Phone number is invalid")
+      expect(@buy_shipment.errors.full_messages).to include('Phone number is invalid')
     end
   end
 end
