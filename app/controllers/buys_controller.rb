@@ -1,11 +1,12 @@
 class BuysController < ApplicationController
+  before_action :set_item, only: [:index, :create]
+  before_action :move_to_root_path, only: [:index]
+
   def index
-    @item = Item.find(params[:item_id])
     @buy_shipment = BuyShipment.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @buy_shipment = BuyShipment.new(buy_params)
     if @buy_shipment.valid?
       pay_item
@@ -31,5 +32,14 @@ class BuysController < ApplicationController
       card: buy_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
+  def move_to_root_path
+    @buy = Buy.find_by(item_id: @item.id)
+    redirect_to root_path if @buy.present?
   end
 end
