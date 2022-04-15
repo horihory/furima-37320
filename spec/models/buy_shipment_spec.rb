@@ -34,6 +34,26 @@ RSpec.describe BuyShipment, type: :model do
       @buy_shipment.valid?
       expect(@buy_shipment.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
     end
+    it 'postal_codeの前半が4桁以上の場合登録できないこと' do
+      @buy_shipment.postal_code = '1234-5678'
+      @buy_shipment.valid?
+      expect(@buy_shipment.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+    end
+    it 'postal_codeの前半が2桁以下の場合登録できないこと' do
+      @buy_shipment.postal_code = '12-3456'
+      @buy_shipment.valid?
+      expect(@buy_shipment.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+    end
+    it 'postal_codeの後半が5桁以上の場合登録できないこと' do
+      @buy_shipment.postal_code = '1234-56789'
+      @buy_shipment.valid?
+      expect(@buy_shipment.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+    end
+    it 'postal_codeの後半が3桁以下の場合登録できないこと' do
+      @buy_shipment.postal_code = '1234-567'
+      @buy_shipment.valid?
+      expect(@buy_shipment.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+    end
     it 'prefecture_idを選択していないと保存できないこと' do
       @buy_shipment.prefecture_id = 0
       @buy_shipment.valid?
