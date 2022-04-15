@@ -1,4 +1,5 @@
 class BuysController < ApplicationController
+  before_action :authenticate_user!, only: [:index]
   before_action :set_item, only: [:index, :create]
   before_action :move_to_root_path, only: [:index]
 
@@ -40,6 +41,6 @@ class BuysController < ApplicationController
 
   def move_to_root_path
     @buy = Buy.find_by(item_id: @item.id)
-    redirect_to root_path if ( @buy.present? ) || ( current_user.id == @item.user_id )
+    redirect_to root_path if @buy.present? || ( current_user.id == @item.user_id )
   end
 end
